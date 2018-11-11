@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "294b3c8f-3991-4be7-b0e1-3745529f197b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "water_coins": {
+      "ver": "1.0.3",
+      "uuid": "eb104faf-997b-4066-a3f5-0e477a7d96d7",
+      "rawTextureUuid": "294b3c8f-3991-4be7-b0e1-3745529f197b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 252,
+      "height": 312,
+      "rawWidth": 252,
+      "rawHeight": 312,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
