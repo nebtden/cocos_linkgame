@@ -40,6 +40,7 @@ cc.Class({
     },
 
     spawnNewStar: function() {
+        console.log(3);
         // 使用给定的模板在场景中生成一个新节点
         var newStar = cc.instantiate(this.starPrefab);
         // 将新增的节点添加到 Canvas 节点下面
@@ -47,9 +48,11 @@ cc.Class({
         // 为星星设置一个随机位置
         newStar.setPosition(this.getNewStarPosition());
 
+        newStar.getComponent('Yun').game = this;
     },
 
     getNewStarPosition: function () {
+        console.log(4);
         var randX = 0;
         // 根据地平面位置和主角跳跃高度，随机得到一个星星的 y 坐标
         var randY = this.groundY + Math.random() * this.player.getComponent('car').jumpHeight + 50;
