@@ -21,10 +21,12 @@ cc.Class({
 
     onLoad () {
 
-        this.node.runAction(this.setJumpAction());
+        // this.node.runAction(this.setJumpAction());
 // 加速度方向开关
         this.accLeft = false;
         this.accRight = false;
+        this.accUp = false;
+        this.accDown = false;
         // 主角当前水平方向速度
         this.xSpeed = 0;
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN,this.myKeyDown,this)
@@ -32,12 +34,8 @@ cc.Class({
 
     },
 
-    update:function(dt){
-        if(this.accLeft){
-            this.xSpeed -= this.accel * dt;
-        } else if (this.accRight) {
-            this.xSpeed += this.accel * dt;
-        }
+    update:function(dt) {
+
 
         // 限制主角的速度不能超过最大值
         // if ( Math.abs(this.xSpeed) > this.maxMoveSpeed ) {
@@ -46,13 +44,25 @@ cc.Class({
         // }
 
         // 根据当前速度更新主角的位置
-        // console.log(this.node.x);
-        // console.log(this.node.y);
+         console.log(this.node.x);
+         console.log(this.node.y);
         // console.log(dt);
-         console.log(this.accLeft);
-        if(this.accLeft){
-            this.node.x =0;
-            this.node.y =0;
+
+        if (this.accLeft) {
+            this.node.x = 0;
+            this.node.y = 0;
+        }
+        if (this.accRight) {
+            this.node.x = 100;
+            this.node.y = 100;
+        }
+        if (this.accUp) {
+            this.node.x = 200;
+            this.node.y = 200;
+        }
+        if (this.accDown) {
+            this.node.x = 50;
+            this.node.y = 50;
         }
 
     },
@@ -65,6 +75,12 @@ cc.Class({
             case cc.macro.KEY.d:
                 this.accRight = true;
                 break;
+            case cc.macro.KEY.w:
+                this.accUp = true;
+                break;
+            case cc.macro.KEY.s:
+                this.accDown = true;
+                break;
         }
         console.log(this.accLeft);
         console.log(1);
@@ -73,10 +89,16 @@ cc.Class({
         // unset a flag when key released
         switch(event.keyCode) {
             case cc.macro.KEY.a:
-                this.accLeft = true;
+                this.accLeft = false;
                 break;
             case cc.macro.KEY.d:
-                this.accRight = true;
+                this.accRight = false;
+                break;
+            case cc.macro.KEY.w:
+                this.accUp = false;
+                break;
+            case cc.macro.KEY.s:
+                this.accDown = false;
                 break;
         }
     },
@@ -84,8 +106,8 @@ cc.Class({
     setJumpAction:function(){
         // 跳跃上升
         var jumpUp = cc.moveBy(this.jumpDuration, cc.v2(0, this.jumpHeight)).easing(cc.easeCubicActionOut());
-         var jumpLeft = cc.moveBy(this.jumpDuration, cc.v2(-this.jumpHeight, 0)).easing(cc.easeCubicActionOut());
-         var jumpRight = cc.moveBy(this.jumpDuration, cc.v2(this.jumpHeight, 0)).easing(cc.easeCubicActionOut());
+        var jumpLeft = cc.moveBy(this.jumpDuration, cc.v2(-this.jumpHeight, 0)).easing(cc.easeCubicActionOut());
+        var jumpRight = cc.moveBy(this.jumpDuration, cc.v2(this.jumpHeight, 0)).easing(cc.easeCubicActionOut());
         // 下落
         var jumpDown = cc.moveBy(this.jumpDuration, cc.v2(0, -this.jumpHeight)).easing(cc.easeCubicActionIn());
         // 不断重复
