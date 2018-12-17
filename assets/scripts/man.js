@@ -31,6 +31,11 @@ cc.Class({
         this.xSpeed = 0;
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN,this.myKeyDown,this)
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP,this.myKeyUp,this)
+        // cc.systemEvent.on(cc.SystemEvent.EventType.TOUCH_START,this.myTouch,this)
+        this.node.on(cc.Node.EventType.TOUCH_START, function (event) {
+            console.log('Mouse down');
+            this.accLeft = true;
+        }, this);
 
     },
 
@@ -49,20 +54,20 @@ cc.Class({
         // console.log(dt);
 
         if (this.accLeft) {
-            this.node.x = 0;
-            this.node.y = 0;
+            this.node.x -= 50;
+            this.accLeft =false;
         }
         if (this.accRight) {
-            this.node.x = 100;
-            this.node.y = 100;
+            this.node.x += 100;
+            this.accRight =false;
         }
         if (this.accUp) {
-            this.node.x = 200;
-            this.node.y = 200;
+            this.node.y += 100;
+            this.accUp =false;
         }
         if (this.accDown) {
-            this.node.x = 50;
-            this.node.y = 50;
+            this.node.y -= 100;
+            this.accDown =false;
         }
 
     },
@@ -101,6 +106,11 @@ cc.Class({
                 this.accDown = false;
                 break;
         }
+    },
+
+    myTouch (event) {
+        // set a flag when key pressed
+        this.accLeft = true;
     },
 
     setJumpAction:function(){
